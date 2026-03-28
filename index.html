@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎵 Music Player</h1>
+            <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+        </header>
+
+        <div class="player-section">
+            <div class="now-playing">
+                <div class="album-art" id="albumArt">
+                    <span>♪</span>
+                </div>
+                <div class="track-info">
+                    <h2 id="trackTitle">No Track Selected</h2>
+                    <p id="trackArtist">Unknown Artist</p>
+                    <p id="trackGenre" class="genre">Unknown Genre</p>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <span class="time" id="currentTime">0:00</span>
+                <input 
+                    type="range" 
+                    id="progressBar" 
+                    class="progress-bar" 
+                    min="0" 
+                    max="100" 
+                    value="0"
+                >
+                <span class="time" id="duration">0:00</span>
+            </div>
+
+            <div class="controls">
+                <button class="btn prev" id="prevBtn" title="Previous">⏮</button>
+                <button class="btn play" id="playBtn" title="Play/Pause">▶</button>
+                <button class="btn next" id="nextBtn" title="Next">⏭</button>
+            </div>
+
+            <div class="volume-container">
+                <label for="volumeControl">🔊</label>
+                <input 
+                    type="range" 
+                    id="volumeControl" 
+                    class="volume-control" 
+                    min="0" 
+                    max="100" 
+                    value="70"
+                >
+                <span id="volumeValue">70%</span>
+            </div>
+
+            <audio id="audioPlayer" crossorigin="anonymous" preload="auto"></audio>
+        </div>
+
+        <section class="upload-section">
+            <h3>Upload Music</h3>
+            <div class="upload-area" id="uploadArea">
+                <p>Drag and drop music files here or click to browse</p>
+                <input 
+                    type="file" 
+                    id="fileInput" 
+                    multiple 
+                    accept="audio/*"
+                    style="display: none;"
+                >
+            </div>
+            <p class="upload-info">Supported: MP3, WAV, OGG, M4A</p>
+        </section>
+
+        <section class="search-section">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-box" 
+                placeholder="Search by title, artist, or genre..."
+            >
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="rock">Rock</button>
+                <button class="filter-btn" data-filter="pop">Pop</button>
+                <button class="filter-btn" data-filter="jazz">Jazz</button>
+                <button class="filter-btn" data-filter="classical">Classical</button>
+                <button class="filter-btn" data-filter="electronic">Electronic</button>
+            </div>
+        </section>
+
+        <section class="playlists-section">
+            <div class="playlist-header">
+                <h3>Playlists</h3>
+                <button class="btn-add" id="createPlaylistBtn">+ New Playlist</button>
+            </div>
+            <div id="playlistsContainer" class="playlists-container"></div>
+        </section>
+
+        <section class="tracks-section">
+            <h3>Tracks</h3>
+            <div id="tracksContainer" class="tracks-container"></div>
+        </section>
+    </div>
+
+    <div id="playlistModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create New Playlist</h2>
+            <input 
+                type="text" 
+                id="playlistNameInput" 
+                placeholder="Enter playlist name..."
+                class="modal-input"
+            >
+            <button id="confirmPlaylistBtn" class="modal-btn">Create</button>
+        </div>
+    </div>
+
+    <div id="addToPlaylistModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add to Playlist</h2>
+            <div id="playlistSelectContainer" class="playlist-select-container"></div>
+            <button id="confirmAddBtn" class="modal-btn">Add</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.5/dist/jsmediatags.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
